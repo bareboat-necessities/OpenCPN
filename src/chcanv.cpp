@@ -877,6 +877,39 @@ ChartCanvas::ChartCanvas ( wxFrame *frame, int canvasIndex ) :
     m_pianoFrozen = false;
     
     SetMinSize(wxSize(200,200));
+
+    if ( !EnableTouchEvents( wxTOUCH_ZOOM_GESTURE | wxTOUCH_PAN_GESTURES ))
+    {
+        wxLogError("Failed to enable touch events");
+        // Still bind event handlers just in case they still work?
+    }
+
+    Bind(wxEVT_GESTURE_ZOOM, &ChartCanvas::OnZoom, this);
+    Bind(wxEVT_GESTURE_PAN, &ChartCanvas::OnPan, this);
+}
+
+void ChartCanvas::OnPan(wxPanGestureEvent& event)
+{
+    if ( event.IsGestureEnd() )
+    {
+        wxEvtHandler *evthp = GetEventHandler();
+        wxMouseEvent ev( wxEVT_MOTION );
+        ev.m_x = event.GetPosition().x + event.GetDelta().x; //mouse_x;
+        ev.m_y = event.GetPosition().y + event.GetDelta().y; //mouse_y;
+        ev.m_leftDown = true;
+        ::wxPostEvent( evthp, ev );
+    }
+}
+
+void ChartCanvas::OnZoom(wxZoomGestureEvent& event)
+{
+    if ( event.IsGestureEnd() )
+    {
+        if (event.GetZoomFactor() > 1.1 || event.GetZoomFactor() < 0.9)
+        {
+           ZoomCanvas( event.GetZoomFactor(), true, false );
+        }
+    }
 }
 
 ChartCanvas::~ChartCanvas()

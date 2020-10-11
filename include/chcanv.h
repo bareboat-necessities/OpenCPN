@@ -156,6 +156,9 @@ public:
       void Scroll(int dx, int dy);
       void OnToolLeftClick( wxCommandEvent& event );
       
+      void OnZoom(wxZoomGestureEvent& event);
+      void OnPan(wxPanGestureEvent& event);
+
       bool MouseEventOverlayWindows( wxMouseEvent& event );
       bool MouseEventChartBar( wxMouseEvent& event );
       bool MouseEventSetup( wxMouseEvent& event, bool b_handle_dclick = true );
