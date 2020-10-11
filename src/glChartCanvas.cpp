@@ -54,6 +54,7 @@ private:
 };
 #endif
 
+#include <GL/glx.h>
 
 #if defined(__OCPN__ANDROID__)
 #include "androidUTIL.h"
