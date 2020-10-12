@@ -903,11 +903,34 @@ void ChartCanvas::OnPan(wxPanGestureEvent& event)
 
 void ChartCanvas::OnZoom(wxZoomGestureEvent& event)
 {
+/*
     if ( event.IsGestureEnd() )
     {
         if (event.GetZoomFactor() > 1.1 || event.GetZoomFactor() < 0.9)
         {
            ZoomCanvas( event.GetZoomFactor(), true, false );
+        }
+    }
+*/
+    if ( event.IsGestureEnd() )
+    {
+        wxEvtHandler *evthp = GetEventHandler();
+        wxKeyEvent ev( wxEVT_KEY_DOWN );
+        ev.m_x = event.GetPosition().x;
+        ev.m_y = event.GetPosition().y;
+        if (event.GetZoomFactor() > 1.1)
+        {
+            ev.m_keyCode = '+';
+            m_modkeys = wxMOD_ALT;
+            ::wxPostEvent( evthp, ev );
+            m_modkeys = 0;
+        }
+        else if (event.GetZoomFactor() < 0.9)
+        {
+            ev.m_keyCode = '-';
+            m_modkeys = wxMOD_ALT;
+            ::wxPostEvent( evthp, ev );
+            m_modkeys = 0;
         }
     }
 }
