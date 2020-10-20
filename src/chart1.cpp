@@ -7620,7 +7620,10 @@ void MyFrame::OnFrameTimer1( wxTimerEvent& event )
     }
 
     nBlinkerTick++;
-    
+
+    // This call sends autopilot output strings to output ports.
+    bool bactiveRouteUpdate = g_pRouteMan->UpdateProgress();
+
     // For each canvas....
     for(unsigned int i=0 ; i < g_canvasArray.GetCount() ; i++){
         ChartCanvas *cc = g_canvasArray.Item(i);
@@ -7628,8 +7631,8 @@ void MyFrame::OnFrameTimer1( wxTimerEvent& event )
     
             cc->DrawBlinkObjects();
 
-//      Update the active route, if any
-            if( g_pRouteMan->UpdateProgress() ) {
+//      Update the active route, if any, as determined above
+            if( bactiveRouteUpdate ) {
         //    This RefreshRect will cause any active routepoint to blink
                 if( g_pRouteMan->GetpActiveRoute() )
                     cc->RefreshRect( g_blink_rect, false );
@@ -8874,7 +8877,6 @@ void MyFrame::setCourseOverGround(double cog)
     if(!g_own_ship_sog_cog_calc) {
         wxLogDebug(wxString::Format(_T("COG: %f"), cog));
         gCog = cog;
-        gGPS_Watchdog = gps_watchdog_timeout_ticks;
     }
 }
 
@@ -8883,7 +8885,6 @@ void MyFrame::setSpeedOverGround(double sog)
     if(!g_own_ship_sog_cog_calc) {
         wxLogDebug(wxString::Format(_T("SOG: %f"), sog));
         gSog = sog;
-        gGPS_Watchdog = gps_watchdog_timeout_ticks;
     }
 }
 
