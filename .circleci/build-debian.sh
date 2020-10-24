@@ -120,21 +120,10 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install autotools-d
     libgtk-3-0                             \
     gir1.2-gtk-3.0                         \
     libgtk-3-dev                           \
-    libwxbase3.1                           \
-    libwxbase3.1-dev                       \
-    libwxgtk3.1                            \
     libwxgtk3.1-dev                        \
-    libwxgtk3.1-gtk3                       \
     libwxgtk3.1-gtk3-dev                   \
-    libwxgtk-media3.1                      \
-    libwxgtk-media3.1-dev                  \
-    libwxgtk-media3.1-gtk3                 \
-    libwxgtk-media3.1-gtk3-dev             \
-    libwxgtk-webview3.1-gtk3               \
-    libwxgtk-webview3.1-gtk3-dev           \
     wx3.1-headers                          \
-    wx3.1-i18n                             \
-    wx-common
+    wx3.1-i18n
 
 docker exec -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
     "cd ci-source; dpkg-buildpackage -b -uc -us; mkdir dist; mv ../*.deb dist; chmod -R a+rw dist"
