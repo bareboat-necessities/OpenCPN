@@ -1,4 +1,4 @@
-evdev-rce ((5.2.9s+dfsg-1) unstable; urgency=medium
+opencpn (5.2.9s+dfsg-1) unstable; urgency=medium
 
   * wxwidgets 3.1.x
 
