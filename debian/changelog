@@ -4,7 +4,7 @@ opencpn (5.2.9a+dfsg-1) unstable; urgency=medium
 
  -- mgrouch <mgrouch@users.github.com>  Sat, 24 Oct 2020 08:42:45 -0400
 
- opencpn (5.2.4+dfsg-1) unstable; urgency=medium
+opencpn (5.2.4+dfsg-1) unstable; urgency=medium
 
   * New upstream maintenance release
   * Drop upstreamed patches
