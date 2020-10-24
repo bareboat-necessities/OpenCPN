@@ -19,7 +19,7 @@ Build-Depends: debhelper-compat (= 12),
  libtinyxml-dev,
  libunarr-dev,
  libwxsvg-dev (>= 2:1.5.21),
- libwxgtk3.0-gtk3-dev (>=3.1),
+ libwxgtk3.1-gtk3-dev (>=3.1),
  lsb-release,
  portaudio19-dev
 Standards-Version: 4.5.0
@@ -34,7 +34,7 @@ Depends: opencpn-data (>= ${source:Version}),
  bzip2,
  ${shlibs:Depends},
  ${misc:Depends}
-Recommends: wx3.0-i18n
+Recommends: wx3.1-i18n
 Breaks: opencpn-plugins (<< 4.8.8~)
 Replaces: opencpn-plugins (<< 4.8.8~)
 Suggests: binutils
