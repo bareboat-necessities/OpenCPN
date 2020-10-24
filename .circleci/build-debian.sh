@@ -119,8 +119,6 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install autotools-d
     libgtk-3-common                        \
     libgtk-3-0                             \
     gir1.2-gtk-3.0                         \
-    libgtk-3-dev                           \
-    libwxgtk3.1-dev                        \
     libwxgtk3.1-gtk3-dev                   \
     wx3.1-headers                          \
     wx3.1-i18n
