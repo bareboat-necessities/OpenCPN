@@ -34,9 +34,9 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get update
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install apt-transport-https
 
 docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
-  "curl -1sLf 'https://dl.cloudsmith.io/public/bbn-projects/bbn-repo/cfg/gpg/gpg.070C975769B2A67A.key' | apt-key add -"
+  "wget -q 'https://dl.cloudsmith.io/public/bbn-projects/bbn-repo/cfg/gpg/gpg.070C975769B2A67A.key' -O- | apt-key add -"
 docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
-  "curl -1sLf 'https://dl.cloudsmith.io/public/bbn-projects/bbn-repo/cfg/setup/config.deb.txt?distro=raspbian&codename=buster' > /etc/apt/sources.list.d/bbn-projects-bbn-repo.list"
+  "wget -q 'https://dl.cloudsmith.io/public/bbn-projects/bbn-repo/cfg/setup/config.deb.txt?distro=raspbian&codename=buster' -O- > /etc/apt/sources.list.d/bbn-projects-bbn-repo.list"
 
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get update
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install autotools-dev autoconf dh-exec cmake gettext git-core \
