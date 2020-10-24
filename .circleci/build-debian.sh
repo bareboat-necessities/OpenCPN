@@ -26,6 +26,18 @@ WORK_DIR=$(pwd):/ci-source
 docker run --privileged -d -ti -e "container=docker"  -v $WORK_DIR:rw $DOCKER_IMAGE /bin/bash
 DOCKER_CONTAINER_ID=$(docker ps --last 4 | grep $CONTAINER_DISTRO | awk '{print $1}')
 
+wget -q https://ftp-master.debian.org/keys/release-10.asc -O- | sudo apt-key add -
+echo "deb http://deb.debian.org/debian buster non-free" | sudo tee -a /etc/apt/sources.list
+sudo apt update
+
+docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get update
+docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install apt-transport-https
+
+docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
+  "curl -1sLf 'https://dl.cloudsmith.io/public/bbn-projects/bbn-repo/cfg/gpg/gpg.070C975769B2A67A.key' | apt-key add -"
+docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
+  "curl -1sLf 'https://dl.cloudsmith.io/public/bbn-projects/bbn-repo/cfg/setup/config.deb.txt?distro=raspbian&codename=buster' > /etc/apt/sources.list.d/bbn-projects-bbn-repo.list"
+
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get update
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install autotools-dev autoconf dh-exec cmake gettext git-core \
     libgtk-3-dev                           \
@@ -100,32 +112,32 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install autotools-d
     libglib2.0-0                           \
     libjson-glib-1.0-0                     \
     libxcomposite1                         \
-    xsltproc
-
-GDK_PIX_VER="2.40.0+dfsg-5"
-GTK_VER="3.24.23-2"
-PRG_REPO=bbn-projects/bbn-repo/deb/raspbian/pool/buster
-PKG_SRC=https://dl.cloudsmith.io/public/${PRG_REPO}/main
-
-docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
-   "wget ${PKG_SRC}/l/li/libgdk-pixbuf2.0-bin_${GDK_PIX_VER}_${PKG_ARCH}.deb;
-    wget ${PKG_SRC}/l/li/libgdk-pixbuf2.0-common_${GDK_PIX_VER}_all.deb;
-    wget ${PKG_SRC}/l/li/libgdk-pixbuf2.0-0_${GDK_PIX_VER}_${PKG_ARCH}.deb;
-    wget ${PKG_SRC}/g/gi/gir1.2-gdkpixbuf-2.0_${GDK_PIX_VER}_${PKG_ARCH}.deb;
-    wget ${PKG_SRC}/l/li/libgdk-pixbuf2.0-dev_${GDK_PIX_VER}_${PKG_ARCH}.deb;
-    wget ${PKG_SRC}/l/li/libgtk-3-common_${GTK_VER}_all.deb;
-    wget ${PKG_SRC}/l/li/libgtk-3-0_${GTK_VER}_${PKG_ARCH}.deb;
-    wget ${PKG_SRC}/g/gi/gir1.2-gtk-3.0_${GTK_VER}_${PKG_ARCH}.deb;
-    wget ${PKG_SRC}/l/li/libgtk-3-dev_${GTK_VER}_${PKG_ARCH}.deb;
-    dpkg -i libgdk-pixbuf2.0-bin_${GDK_PIX_VER}_${PKG_ARCH}.deb;
-    dpkg -i libgdk-pixbuf2.0-common_${GDK_PIX_VER}_all.deb;
-    dpkg -i libgdk-pixbuf2.0-0_${GDK_PIX_VER}_${PKG_ARCH}.deb;
-    dpkg -i gir1.2-gdkpixbuf-2.0_${GDK_PIX_VER}_${PKG_ARCH}.deb;
-    dpkg -i libgdk-pixbuf2.0-dev_${GDK_PIX_VER}_${PKG_ARCH}.deb;
-    dpkg -i libgtk-3-common_${GTK_VER}_all.deb;
-    dpkg -i libgtk-3-0_${GTK_VER}_${PKG_ARCH}.deb;
-    dpkg -i gir1.2-gtk-3.0_${GTK_VER}_${PKG_ARCH}.deb;
-    dpkg -i libgtk-3-dev_${GTK_VER}_${PKG_ARCH}.deb"
+    xsltproc                               \
+    libgdk-pixbuf2.0-bin                   \
+    libgdk-pixbuf2.0-common                \
+    libgdk-pixbuf2.0-0                     \
+    gir1.2-gdkpixbuf-2.0                   \
+    libgdk-pixbuf2.0-dev                   \
+    libgtk-3-common                        \
+    libgtk-3-0                             \
+    gir1.2-gtk-3.0                         \
+    libgtk-3-dev                           \
+    libwxbase3.1                           \
+    libwxbase3.1                           \
+    libwxbase3.1-dev                       \
+    libwxgtk3.1                            \
+    libwxgtk3.1-dev                        \
+    libwxgtk3.1-gtk3                       \
+    libwxgtk3.1-gtk3-dev                   \
+    libwxgtk-media3.1                      \
+    libwxgtk-media3.1-dev                  \
+    libwxgtk-media3.1-gtk3                 \
+    libwxgtk-media3.1-gtk3-dev             \
+    libwxgtk-webview3.1-gtk3               \
+    libwxgtk-webview3.1-gtk3-dev           \
+    wx3.1-headers                          \
+    wx3.1-i18n                             \
+    wx-common
 
 docker exec -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
     "cd ci-source; dpkg-buildpackage -b -uc -us; mkdir dist; mv ../*.deb dist; chmod -R a+rw dist"
