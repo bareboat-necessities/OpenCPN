@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 EXT=$1
 REPO=$2
 DISTRO=$3
