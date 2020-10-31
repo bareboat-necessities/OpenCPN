@@ -2147,8 +2147,6 @@ bool PlugInManager::CheckPluginCompatibility(wxString plugin_file)
     sprintf( strver,
 #if defined(__WXGTK3__)
              "libwx_gtk3u_core-%i.%i"
-#elif defined(__WXGTK20__)
-             "libwx_gtk2u_core-%i.%i"
 #elif defined(__WXQT__)
              "libwx_qtu_core-%i.%i"
 #else

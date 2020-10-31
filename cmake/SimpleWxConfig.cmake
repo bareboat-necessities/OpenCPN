@@ -16,7 +16,7 @@ macro(SimpleWxConfig)
     find_package(GTK2) 
     if(GTK2_FOUND)
         set(wxWidgets_CONFIG_OPTIONS 
-            ${wxWidgets_CONFIG_OPTIONS} --toolkit=gtk2)
+            ${wxWidgets_CONFIG_OPTIONS} --toolkit=gtk3)
     else ()
         find_package(GTK3) 
         if(GTK3_FOUND)
