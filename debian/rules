@@ -12,13 +12,19 @@ override_dh_auto_configure:
 	    -DCMAKE_LIBRARY_PATH=$(DEB_HOST_MULTIARCH) \
 	    -DCMAKE_INSTALL_PREFIX=/usr \
 	    -DCMAKE_INSTALL_LIBDIR=/usr/lib \
-            -DBUILD_SHARED_LIBS=OFF \
+        -DBUILD_SHARED_LIBS=OFF \
 	    -DOCPN_BUNDLE_DOCS=OFF \
-            -DOCPN_BUNDLE_TCDATA=ON \
-            -DOCPN_USE_BUNDLED_LIBS=OFF \
-            -DOCPN_USE_NEWSERIAL=OFF \
-            -DOCPN_PLUGIN_CONTENTS_WARN=ON \
-            -DOCPN_FORCE_GTK3=ON
+        -DOCPN_BUNDLE_TCDATA=ON \
+        -DOCPN_BUNDLE_GSHHS=ON \
+        -DOCPN_USE_GL=ON \
+        -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+        -DOCPN_USE_CRASHREPORT=ON \
+        -DOCPN_ENABLE_PORTAUDIO=OFF \
+        -DOCPN_ENABLE_SYSTEM_CMD_SOUND=ON \
+        -DOCPN_USE_BUNDLED_LIBS=OFF \
+        -DOCPN_USE_NEWSERIAL=OFF \
+        -DOCPN_PLUGIN_CONTENTS_WARN=ON \
+        -DOCPN_FORCE_GTK3=ON
 
 override_dh_missing:
 	dh_missing --fail-missing
