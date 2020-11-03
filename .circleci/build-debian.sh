@@ -61,9 +61,9 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install autotools-d
     wx-common                              \
     wx3.1-headers                          \
     wx3.1-i18n                             \
-    libwxgtk3.1-dev                        \
-    libwxbase3.1-dev                       \
+    libwxgtk3.1-gtk3-dev                   \
     libwxgtk-media3.1-dev                  \
+    libwxgtk-webview3.1-gtk3-dev           \
     libwxsvg-dev
 
 docker exec --privileged -ti $DOCKER_CONTAINER_ID ldconfig
