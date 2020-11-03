@@ -58,8 +58,10 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install autotools-d
     libportaudio2                          \
     portaudio19-dev                        \
     libgtk-3-dev                           \
+    libwxbase3.1-dev                       \
     libwxgtk3.1-gtk3-dev                   \
-    libwxgtk3.1-gtk3                       \
+    libwxgtk-media3.1-dev                  \
+    libwxgtk-webview3.1-gtk3-dev           \
     libwxsvg-dev                           \
     wx3.1-i18n
 
