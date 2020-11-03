@@ -51,6 +51,7 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install autotools-d
     libtinyxml-dev                         \
     libunarr-dev                           \
     lsb-release                            \
+    portaudio2                             \
     portaudio19-dev                        \
     libgtk-3-dev                           \
     libwxgtk3.1-gtk3-dev                   \
