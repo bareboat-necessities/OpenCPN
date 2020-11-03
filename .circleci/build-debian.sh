@@ -37,13 +37,17 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get update
 docker exec -ti $DOCKER_CONTAINER_ID apt-get -y install dpkg-dev debhelper devscripts equivs pkg-config apt-utils fakeroot
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install autotools-dev autoconf dh-exec cmake gettext git-core \
+    libgps-dev                             \
+    libglu1-mesa-dev                       \
     libarchive-dev                         \
+    libexpat1-dev                          \
+    libcairo2-dev                          \
     libbz2-dev                             \
+    libssl-dev                             \
     libcurl4-openssl-dev                   \
     libdrm-dev                             \
     libelf-dev                             \
     libexif-dev                            \
-    libgdk-pixbuf2.0-dev                   \
     liblz4-dev                             \
     liblzma-dev                            \
     libpango1.0-dev                        \
@@ -51,7 +55,7 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install autotools-d
     libtinyxml-dev                         \
     libunarr-dev                           \
     lsb-release                            \
-    portaudio2                             \
+    libportaudio2                          \
     portaudio19-dev                        \
     libgtk-3-dev                           \
     libwxgtk3.1-gtk3-dev                   \
