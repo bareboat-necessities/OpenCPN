@@ -58,12 +58,14 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install autotools-d
     libportaudio2                          \
     portaudio19-dev                        \
     libgtk-3-dev                           \
+    wx-common                              \
+    wx3.1-headers                          \
+    wx3.1-i18n                             \
     libwxbase3.1-dev                       \
     libwxgtk3.1-gtk3-dev                   \
     libwxgtk-media3.1-dev                  \
     libwxgtk-webview3.1-gtk3-dev           \
-    libwxsvg-dev                           \
-    wx3.1-i18n
+    libwxsvg-dev
 
 docker exec -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
     "update-alternatives --set fakeroot /usr/bin/fakeroot-tcp; cd ci-source; dpkg-buildpackage -b -uc -us -j2; mkdir dist; mv ../*.deb dist; chmod -R a+rw dist"
