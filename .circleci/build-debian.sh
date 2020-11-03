@@ -50,11 +50,11 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install autotools-d
     libsqlite3-dev                         \
     libtinyxml-dev                         \
     libunarr-dev                           \
-    libwxsvg-dev                           \
     lsb-release                            \
     portaudio19-dev                        \
     libgtk-3-dev                           \
     libwxgtk3.1-gtk3-dev                   \
+    libwxgtk3.1-gtk3                       \
     libwxsvg-dev                           \
     wx3.1-i18n
 
