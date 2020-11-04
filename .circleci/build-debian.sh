@@ -64,6 +64,8 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install autotools-d
     libwxgtk3.1-gtk3-dev                   \
     libwxsvg-dev
 
+docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y remove libwxgtk3.0-0v5
+
 docker exec --privileged -ti $DOCKER_CONTAINER_ID ldconfig
 
 docker exec -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
