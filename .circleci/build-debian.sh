@@ -57,7 +57,7 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install autotools-d
     lsb-release                            \
     libportaudio2                          \
     portaudio19-dev                        \
-    libgtk-3-dev                           \
+    libgtk2.0-dev                          \
     wx-common                              \
     wx3.1-headers                          \
     wx3.1-i18n                             \
