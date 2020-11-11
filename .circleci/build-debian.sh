@@ -36,7 +36,7 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
 
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get update
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install dpkg-dev debhelper devscripts equivs pkg-config apt-utils fakeroot
-docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install libwxsvg-dev libwxsvg3
+docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install libwxsvg-dev libwxsvg3 libwxgtk3.0-dev
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install autotools-dev autoconf dh-exec cmake gettext git-core \
     libgps-dev                             \
     libglu1-mesa-dev                       \
