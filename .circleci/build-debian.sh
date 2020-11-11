@@ -70,7 +70,7 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install autotools-d
 docker exec --privileged -ti $DOCKER_CONTAINER_ID ldconfig
 
 docker exec -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
-    "update-alternatives --set fakeroot /usr/bin/fakeroot-tcp; cd ci-source; dpkg-buildpackage -b -uc -us -j2; mkdir dist; mv ../*.deb dist; chmod -R a+rw dist"
+    "update-alternatives --set fakeroot /usr/bin/fakeroot-tcp; cd ci-source; dpkg-buildpackage -b -d -uc -us -j2; mkdir dist; mv ../*.deb dist; chmod -R a+rw dist"
 
 find dist -name \*.\*$EXT
 
