@@ -44,7 +44,7 @@ if (WXWEBVIEW_LIBRARIES)
 else (WXWEBVIEW_LIBRARIES)
 	find_library(WXWEBVIEW_LIBRARY
 	NAMES
-	wx_gtk3u_webview-3.1
+	wx_gtk2u_webview-3.1
 	PATHS
 	/usr/lib
 	/usr/local/lib
