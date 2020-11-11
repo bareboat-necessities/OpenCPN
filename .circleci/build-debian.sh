@@ -34,9 +34,10 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
 docker exec --privileged -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
   "wget -q 'https://dl.cloudsmith.io/public/bbn-projects/bbn-gtk2-repo/cfg/setup/config.deb.txt?distro=${PKG_DISTRO}&codename=${PKG_RELEASE}' -O- | tee -a /etc/apt/sources.list"
 
+docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install libwxsvg-dev libwxsvg3 libwxgtk3.0-dev wx-commonwx-common
+
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get update
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install dpkg-dev debhelper devscripts equivs pkg-config apt-utils fakeroot
-docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install libwxsvg-dev libwxsvg3 libwxgtk3.0-dev
 docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y install autotools-dev autoconf dh-exec cmake gettext git-core \
     libgps-dev                             \
     libglu1-mesa-dev                       \
