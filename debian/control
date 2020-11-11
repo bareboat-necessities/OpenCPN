@@ -18,7 +18,6 @@ Build-Depends: debhelper-compat (= 12),
  libsqlite3-dev,
  libtinyxml-dev,
  libunarr-dev,
- libwxsvg-dev,
  libwxgtk3.1-dev (>=3.1),
  lsb-release,
  portaudio19-dev
