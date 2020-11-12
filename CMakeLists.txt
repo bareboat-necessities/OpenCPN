@@ -215,7 +215,7 @@ else ()
   set(OCPN_USE_CRASHREPORT FALSE)
 endif ()
 
-option(OCPN_FORCE_GTK3 "Force the build to use GTK3 [ON]" "ON")
+option(OCPN_FORCE_GTK2 "Force the build to use GTK2 [ON]" "OFF")
 
 if (NOT WIN32 AND NOT APPLE AND NOT CMAKE_SYSTEM_PROCESSOR MATCHES "arm*")
   set(PA_DEFAULT "ON")
@@ -720,7 +720,7 @@ if (NOT QT_ANDROID)
     set(wxWidgets_EXCLUDE_COMMON_LIBRARIES TRUE)
   endif (MSVC)
 
-  set(wxWidgets_CONFIG_OPTIONS ${wxWidgets_CONFIG_OPTIONS} --toolkit=gtk3)
+  set(wxWidgets_CONFIG_OPTIONS ${wxWidgets_CONFIG_OPTIONS} --toolkit=gtk2)
 
   find_package(wxWidgets COMPONENTS ${wxWidgets_FIND_COMPONENTS})
   if (wxWidgets_FOUND AND OCPN_USE_WEBVIEW)
@@ -735,7 +735,7 @@ if (NOT QT_ANDROID)
   if (NOT wxWidgets_FOUND)
     message (FATAL_ERROR
       "Cannot find wxWidgets, giving up. On linux you might want to try"
-      " using -DOCPN_FORCE_GTK3."
+      " using -DOCPN_FORCE_GTK2."
     )
   endif ()
   if (MSYS)
@@ -752,10 +752,10 @@ if (NOT QT_ANDROID)
   # As of cmake 3.11.2, these libraries are missing in list despite that we
   # looked for them. This is a nasty fix which might fail miserably. Assumption:
   # All builds using GTK uses unicode and wxWidgets 3.1
-  if (GTK3_FOUND)
-    list(APPEND wxWidgets_LIBRARIES "-lwx_gtk3u_aui-3.1")
+  if (GTK2_FOUND)
+    list(APPEND wxWidgets_LIBRARIES "-lwx_gtk2u_aui-3.1")
     if (OPENGL_FOUND)
-      list(APPEND wxWidgets_LIBRARIES "-lwx_gtk3u_gl-3.1")
+      list(APPEND wxWidgets_LIBRARIES "-lwx_gtk2u_gl-3.1")
     endif ()
   endif ()
 
@@ -780,8 +780,8 @@ if (NOT QT_ANDROID)
   message(STATUS " Revised wxWidgets Libraries: ${wxWidgets_LIBRARIES}")
 endif (NOT QT_ANDROID)
 
-# Handle #1500: Force NDEBUG on gtk3 for wxwidgets < 3.2 (all builds)
-if (GTK3_FOUND)
+# Handle #1500: Force NDEBUG on gtk2 for wxwidgets < 3.2 (all builds)
+if (GTK2_FOUND)
   set( _VERSPROG [=[
     #include <stdio.h>
     #include <wx/version.h>
@@ -802,7 +802,7 @@ if (GTK3_FOUND)
     message(FATAL_ERROR "Cannot run wxWidgets  version test (!)")
   elseif ("${_WX_VERSION}" LESS 32)
     add_definitions("-DNDEBUG")
-    message(STATUS "Forcing -NDEBUG on gtk3 build (#1500).")
+    message(STATUS "Forcing -NDEBUG on gtk2 build (#1500).")
   endif ()
 endif ()
 
