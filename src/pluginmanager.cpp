@@ -2149,6 +2149,8 @@ bool PlugInManager::CheckPluginCompatibility(wxString plugin_file)
              "libwx_gtk3u_core-%i.%i"
 #elif defined(__WXQT__)
              "libwx_qtu_core-%i.%i"
+#elif defined(__WXGTK__)
+             "libwx_gtk2u_core-%i.%i"
 #else
              #error undefined plugin platform
 #endif    
