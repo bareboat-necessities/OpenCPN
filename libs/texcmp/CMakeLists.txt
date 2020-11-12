@@ -37,7 +37,7 @@ if (NOT wxWidgets_INCLUDE_DIRS)
     if (GTK2_FOUND)
         target_include_directories(TEXCMP PRIVATE ${GTK2_INCLUDE_DIRS})
         set(GTK_LIBRARIES ${GTK2_LIBRARIES})
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__WXGTK2__")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__WXGTK__")
         set(wxWidgets_CONFIG_OPTIONS 
             ${wxWidgets_CONFIG_OPTIONS} --toolkit=gtk2)
         message(STATUS "Building against GTK2...")
