@@ -215,8 +215,6 @@ else ()
   set(OCPN_USE_CRASHREPORT FALSE)
 endif ()
 
-option(OCPN_FORCE_GTK3 "Force the build to use GTK3 [ON]" "ON")
-
 if (NOT WIN32 AND NOT APPLE AND NOT CMAKE_SYSTEM_PROCESSOR MATCHES "arm*")
   set(PA_DEFAULT "ON")
 else ()
