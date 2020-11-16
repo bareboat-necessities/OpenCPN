@@ -69,6 +69,9 @@ docker exec --privileged -ti $DOCKER_CONTAINER_ID apt-get -y remove libwxgtk3.0-
 docker exec --privileged -ti $DOCKER_CONTAINER_ID ldconfig
 
 docker exec -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
+    "update-alternatives --set wx-config /usr/lib/*-linux-*/wx/config/gtk3-unicode-3.1"
+
+docker exec -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
     "update-alternatives --set fakeroot /usr/bin/fakeroot-tcp; cd ci-source; dpkg-buildpackage -b -uc -us -j2; mkdir dist; mv ../*.deb dist; chmod -R a+rw dist"
 
 find dist -name \*.\*$EXT
